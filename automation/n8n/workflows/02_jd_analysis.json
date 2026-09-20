@@ -1,0 +1,59 @@
+{
+  "name": "JD Analysis",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "jd-analysis",
+        "responseMode": "lastNode"
+      },
+      "id": "0",
+      "name": "JD Submitted",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "webhookId": "jd-analysis"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.BACKEND_URL}}/api/v1/jobs/analyze",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\"text\": $json.body.text, \"url\": $json.body.url} }}"
+      },
+      "id": "1",
+      "name": "Call JD Analyze API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "JD Submitted": {
+      "main": [
+        [
+          {
+            "node": "Call JD Analyze API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

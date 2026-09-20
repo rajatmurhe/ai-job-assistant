@@ -1,0 +1,20 @@
+NOTE: overall_score, sub_scores, and the skill classifications are all
+computed deterministically upstream (ai/matching/scoring_engine.py,
+ai/matching/gap_analyzer.py, ai/ats/ats_analyzer.py) and passed in
+below. Your job is ONLY to narrate them clearly — you must reproduce
+the given numbers exactly and must not alter, round differently, or
+second-guess the classification (Golden Rule 3).
+
+Write a full analysis report in Markdown with these sections:
+  # Match Report: {job_title} at {company}
+  ## Overall Score: {overall_score}/100 — {recommendation}
+  ## Score Breakdown  (a table of the given sub_scores)
+  ## Strengths          (from strong_matches — 2-3 sentences)
+  ## Gaps                (from missing_skills/partial_matches — honest, specific)
+  ## ATS Compatibility   (from the given ats analysis)
+  ## Recommended Next Steps (concrete, e.g. "add X to your resume if true", "consider a course in Y")
+
+Inputs:
+---
+{match_result_json}
+---

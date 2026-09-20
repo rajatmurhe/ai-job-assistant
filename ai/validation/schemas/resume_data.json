@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ResumeData",
+  "type": "object",
+  "required": ["candidate", "summary", "education", "experience", "skills", "projects", "certifications"],
+  "properties": {
+    "candidate": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {"type": "string"},
+        "email": {"type": ["string", "null"]},
+        "phone": {"type": ["string", "null"]},
+        "location": {"type": ["string", "null"]},
+        "linkedin": {"type": ["string", "null"]},
+        "github": {"type": ["string", "null"]},
+        "portfolio": {"type": ["string", "null"]}
+      }
+    },
+    "summary": {"type": ["string", "null"]},
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["institution", "degree"],
+        "properties": {
+          "institution": {"type": "string"},
+          "degree": {"type": "string"},
+          "field": {"type": ["string", "null"]},
+          "gpa": {"type": ["string", "null"]},
+          "start_date": {"type": ["string", "null"]},
+          "end_date": {"type": ["string", "null"]},
+          "achievements": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "experience": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["company", "title"],
+        "properties": {
+          "company": {"type": "string"},
+          "title": {"type": "string"},
+          "location": {"type": ["string", "null"]},
+          "start_date": {"type": ["string", "null"]},
+          "end_date": {"type": ["string", "null"]},
+          "is_current": {"type": "boolean"},
+          "bullets": {"type": "array", "items": {"type": "string"}},
+          "technologies": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {"type": "string"},
+          "category": {"type": ["string", "null"], "enum": ["language", "framework", "tool", "soft", "domain", null]},
+          "years": {"type": ["number", "null"]},
+          "proficiency": {"type": ["string", "null"], "enum": ["expert", "intermediate", "beginner", null]},
+          "context": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {"type": "string"},
+          "description": {"type": ["string", "null"]},
+          "technologies": {"type": "array", "items": {"type": "string"}},
+          "url": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": {"type": "string"},
+          "issuer": {"type": ["string", "null"]},
+          "date": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "Report Generation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "report-generation",
+        "responseMode": "lastNode"
+      },
+      "id": "0",
+      "name": "Report Requested",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "webhookId": "report-generation"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.BACKEND_URL}}/api/v1/reports/{{$json.body.report_id}}/narrative",
+        "options": {}
+      },
+      "id": "1",
+      "name": "Call Report Narrative API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Report Requested": {
+      "main": [
+        [
+          {
+            "node": "Call Report Narrative API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

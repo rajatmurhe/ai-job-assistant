@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "JobData",
+  "type": "object",
+  "required": ["title", "company", "requirements", "skills"],
+  "properties": {
+    "title": {"type": "string"},
+    "company": {"type": ["string", "null"]},
+    "location": {"type": ["string", "null"]},
+    "work_arrangement": {"type": ["string", "null"], "enum": ["remote", "hybrid", "onsite", null]},
+    "seniority": {"type": ["string", "null"], "enum": ["junior", "mid", "senior", "staff", "lead", null]},
+    "salary_min": {"type": ["integer", "null"]},
+    "salary_max": {"type": ["integer", "null"]},
+    "salary_currency": {"type": ["string", "null"]},
+    "summary": {"type": ["string", "null"]},
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["requirement_type", "value", "importance"],
+        "properties": {
+          "requirement_type": {"type": "string", "enum": ["skill", "education", "experience", "certification"]},
+          "value": {"type": "string"},
+          "importance": {"type": "string", "enum": ["MANDATORY", "PREFERRED", "NICE_TO_HAVE"]}
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "importance"],
+        "properties": {
+          "name": {"type": "string"},
+          "importance": {"type": "string", "enum": ["MANDATORY", "PREFERRED", "NICE_TO_HAVE"]},
+          "years_required": {"type": ["number", "null"]}
+        }
+      }
+    },
+    "ats_keywords": {"type": "array", "items": {"type": "string"}}
+  }
+}

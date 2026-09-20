@@ -1,0 +1,12 @@
+NOTE: Skill matching itself is deterministic (see ai/matching/skill_matcher.py)
+and does not call the LLM — this prompt file exists for the optional
+LLM-assisted alias-discovery pass used to expand skills.aliases entries
+during resume/JD extraction (e.g. recognizing "JS" and "ECMAScript" as
+aliases of "JavaScript"). Not required for the core deterministic match.
+
+Given the following skill name, list common aliases, abbreviations, and
+alternate spellings a resume or job posting might use for it. Return a
+JSON array of strings only, e.g. ["JS", "ECMAScript", "Javascript"].
+Do not include broader or narrower skills — only exact synonyms.
+
+Skill: {skill_name}

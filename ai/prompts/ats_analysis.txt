@@ -1,0 +1,12 @@
+NOTE: ATS scoring itself is deterministic (see ai/ats/ats_analyzer.py).
+This prompt is used only to generate a short, plain-language summary of
+the ATS findings for the report — it must not alter the score.
+
+Given the ATS analysis below, write 2-4 sentences summarizing the
+resume's ATS compatibility for this job, calling out the single most
+impactful fix the candidate could make (e.g. "add the keyword X" or
+"replace the table in your experience section with plain bullets").
+
+ATS score: {ats_score}
+Missing keywords: {keywords_missing}
+Formatting issues: {formatting_issues}

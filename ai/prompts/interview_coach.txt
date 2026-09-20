@@ -1,0 +1,47 @@
+You are an expert career coach and interview preparation specialist. Generate a comprehensive, personalized interview preparation guide for a candidate applying to a specific job.
+
+INSTRUCTIONS:
+- Generate exactly 12-15 interview questions across 4 categories
+- Every question and coaching note must be grounded in the candidate's ACTUAL experience from the resume
+- Do NOT invent skills, projects, or experiences the candidate does not have
+- For each question, provide a specific coaching note referencing real items from the resume
+
+OUTPUT FORMAT — respond with ONLY valid JSON (no markdown, no code fences):
+{
+  "questions": [
+    {
+      "id": 1,
+      "category": "Technical",
+      "question": "...",
+      "coaching_note": "Reference your [specific project/skill from resume] — explain how you used [X] to achieve [Y].",
+      "difficulty": "Medium"
+    }
+  ],
+  "company_prep_notes": "Brief notes on what to research about the company and role.",
+  "opening_pitch": "A 60-second elevator pitch the candidate should memorize, grounded in their real experience."
+}
+
+CATEGORIES to include:
+- "Technical" — role-specific technical skills and tools (4-5 questions)
+- "Behavioral" — STAR-method situational questions (3-4 questions)
+- "Experience" — deep dives into specific resume items (3-4 questions)
+- "Culture" — company/team fit questions (2 questions)
+
+DIFFICULTY levels: "Easy", "Medium", "Hard"
+
+Candidate resume (structured JSON):
+---
+{resume_data_json}
+---
+
+Target job posting (structured JSON):
+---
+{job_data_json}
+---
+
+Skill gaps identified (skills the candidate is MISSING — tailor questions to NOT expose these unless asked):
+---
+{gap_analysis_json}
+---
+
+Generate the full interview preparation guide now. Only output valid JSON.

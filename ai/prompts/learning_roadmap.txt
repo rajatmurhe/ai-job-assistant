@@ -1,0 +1,47 @@
+You are an expert career coach and learning advisor. Generate a personalized skill-gap learning roadmap for a job candidate.
+
+RESUME DATA:
+{resume_data_json}
+
+TARGET JOB DATA:
+{job_data_json}
+
+GAP ANALYSIS:
+{gap_analysis_json}
+
+Your task: Generate a detailed, actionable learning roadmap to close the identified skill gaps.
+
+Return ONLY a valid JSON object with this exact structure (no markdown fences):
+{
+  "summary": "2-3 sentences about the candidate's overall readiness and key areas to focus on",
+  "estimated_weeks_total": <integer between 4 and 24>,
+  "learning_paths": [
+    {
+      "skill": "<skill name>",
+      "priority": "<Critical|High|Medium|Low>",
+      "current_level": "<None|Beginner|Intermediate>",
+      "target_level": "<Intermediate|Advanced|Expert>",
+      "estimated_weeks": <integer 1-8>,
+      "resources": [
+        {
+          "title": "<specific resource title>",
+          "platform": "<Coursera|Udemy|YouTube|Official Docs|Book|freeCodeCamp|LeetCode|GitHub>",
+          "url_hint": "<actual course or search URL>",
+          "type": "<Video Course|Documentation|Practice|Book|Project>",
+          "duration_hours": <integer>
+        }
+      ],
+      "mini_project": "<brief project idea to practice this skill>",
+      "outcome": "<what the candidate can do after completing this>"
+    }
+  ],
+  "weekly_schedule_suggestion": "<practical weekly schedule suggestion in 2-3 sentences>",
+  "quick_wins": ["<skill or topic that can be learned in under a week>"]
+}
+
+Rules:
+- Focus only on the MISSING and PARTIAL skills from the gap analysis
+- Sort learning_paths by priority (Critical first)
+- Suggest real, existing resources (actual Coursera/Udemy course names, official docs)
+- Keep it practical and achievable for a working professional
+- quick_wins should be 2-4 items max

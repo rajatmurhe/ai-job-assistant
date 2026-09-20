@@ -1,0 +1,56 @@
+{
+  "name": "ATS Analysis",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ats-analysis",
+        "responseMode": "lastNode"
+      },
+      "id": "0",
+      "name": "ATS Analysis Requested",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "webhookId": "ats-analysis"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.BACKEND_URL}}/api/v1/reports/{{$json.body.report_id}}",
+        "options": {}
+      },
+      "id": "1",
+      "name": "Fetch Report (contains ats_analysis)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "ATS Analysis Requested": {
+      "main": [
+        [
+          {
+            "node": "Fetch Report (contains ats_analysis)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

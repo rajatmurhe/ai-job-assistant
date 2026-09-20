@@ -1,0 +1,41 @@
+You are an expert recruiter outreach specialist. Write a compelling cold email to a recruiter or hiring manager.
+
+RESUME DATA:
+{resume_data_json}
+
+TARGET JOB DATA:
+{job_data_json}
+
+RECRUITER NAME: {recruiter_name}
+MATCH SCORE: {match_score}
+
+Your task: Write a personalized, professional cold email that will stand out in a recruiter's inbox.
+
+Return ONLY a valid JSON object with this exact structure (no markdown fences):
+{
+  "subject_lines": [
+    "<subject line option 1 - direct and value-focused>",
+    "<subject line option 2 - curiosity-driven>",
+    "<subject line option 3 - referral-style>"
+  ],
+  "email_body": "<full email body, 150-200 words max, personalized and compelling>",
+  "linkedin_dm": "<shorter LinkedIn DM version, under 300 chars>",
+  "follow_up_email": "<follow-up email for 1 week later if no response>",
+  "personalization_hooks": [
+    "<specific thing from the company/job to reference in conversation>"
+  ],
+  "best_send_times": "<when to send this email for best open rates>",
+  "tips": [
+    "<tip for maximizing response rate>"
+  ]
+}
+
+Rules:
+- Email must open with a strong, specific hook (not 'I hope this email finds you well')
+- Reference specific skills or achievements from the resume that match the job
+- Keep it under 200 words - recruiters are busy
+- Include a clear, single call-to-action
+- LinkedIn DM must be under 300 chars total
+- Personalization hooks should reference real company details from the job data
+- If recruiter_name is empty, use a professional generic salutation
+- tips should be 3-4 items

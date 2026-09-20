@@ -1,0 +1,22 @@
+NOTE: Gap classification (strong/partial/missing) is computed
+deterministically in ai/matching/gap_analyzer.py. This prompt is used
+only to generate the human-readable narrative explanation of the gaps
+for the final report (Module 9) — it must not alter the classification
+itself (Golden Rule 3).
+
+You are given the deterministic skill-gap classification below. Write a
+short, honest, plain-language paragraph (4-6 sentences) explaining these
+gaps to the candidate. Be specific about which missing skills matter
+most for this role and why, based on the job description context
+provided. Do not suggest the candidate claims skills they don't have.
+Do not soften a MANDATORY gap into sounding optional.
+
+Strong matches: {strong_matches}
+Partial matches: {partial_matches}
+Missing skills: {missing_skills}
+Transferable skills: {transferable_skills}
+
+Job context:
+---
+{job_summary}
+---

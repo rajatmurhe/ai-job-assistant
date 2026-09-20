@@ -1,0 +1,23 @@
+Write a short, professional application email to accompany the resume
+and cover letter for this job. Same truthfulness contract applies.
+
+Requirements:
+  - Subject line: concise, includes the role title.
+  - Body: 3-5 sentences. State the role being applied for, one
+    genuine, specific reason for interest, and one real strength from
+    the resume relevant to the role. Mention the attached resume and
+    cover letter. Professional sign-off.
+  - Do not repeat the full cover letter — this is a brief, scannable
+    email a recruiter reads in 15 seconds.
+
+Return JSON: {"subject": "", "body": ""}
+
+Source resume (structured):
+---
+{resume_data_json}
+---
+
+Target job (structured):
+---
+{job_data_json}
+---

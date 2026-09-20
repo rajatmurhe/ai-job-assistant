@@ -1,0 +1,59 @@
+{
+  "name": "Resume Generation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "resume-generation",
+        "responseMode": "lastNode"
+      },
+      "id": "0",
+      "name": "Resume Generation Requested",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "webhookId": "resume-generation"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.BACKEND_URL}}/api/v1/generate",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\"resume_id\": $json.body.resume_id, \"job_id\": $json.body.job_id, \"application_id\": $json.body.application_id} }}"
+      },
+      "id": "1",
+      "name": "Call Generate API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Resume Generation Requested": {
+      "main": [
+        [
+          {
+            "node": "Call Generate API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

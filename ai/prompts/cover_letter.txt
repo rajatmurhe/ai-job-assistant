@@ -1,0 +1,21 @@
+Write a personalized, professional cover letter for this candidate
+applying to this specific job. Same truthfulness contract as resume
+optimization applies: every claim must be traceable to the source
+resume. No invented projects, employers, metrics, or skills.
+
+Tone: confident, specific, and concise (3-4 paragraphs, under 400
+words). Open with why this specific role/company is a fit. Reference
+1-2 concrete, real accomplishments from the resume that map to the
+job's top requirements. Close with a clear, low-pressure call to action.
+Do not use generic filler phrases ("I am writing to express my
+interest..."). Do not restate the entire resume.
+
+Source resume (structured):
+---
+{resume_data_json}
+---
+
+Target job (structured):
+---
+{job_data_json}
+---

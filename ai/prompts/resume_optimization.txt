@@ -1,0 +1,40 @@
+You are rewriting a resume to be ATS-optimized for a specific job,
+under a strict TRUTHFULNESS CONTRACT (see section 16 of the master
+documentation):
+
+  - You may REORDER, REPHRASE, and RE-EMPHASIZE content already present
+    in the source resume (provided below) to better match the job
+    description's language and priorities.
+  - You may incorporate a missing ATS keyword ONLY if it is a synonym
+    or alternate phrasing of something the candidate already did
+    (e.g. resume says "led a team of 4", JD says "team leadership" ->
+    you may write "team leadership" since it's the same fact).
+  - You MUST NOT invent, add, or imply: a skill, tool, employer,
+    job title, metric, certification, degree, or achievement that
+    does not appear in the source resume.
+  - You MUST NOT change dates, company names, or job titles.
+  - If the job requires something the candidate's resume does not
+    support, leave it out — do not paper over the gap.
+
+Output the optimized resume as clean Markdown, structured for ATS
+parsing: standard section headers (Summary, Experience, Education,
+Skills), no tables, no multi-column layout, no icons/graphics.
+
+After the resume, on a new line starting with "CHANGES_MADE:", list
+each substantive change you made and, for each one, which source
+resume fact it is based on.
+
+Source resume (structured):
+---
+{resume_data_json}
+---
+
+Target job description (structured):
+---
+{job_data_json}
+---
+
+Skill gap analysis (for context — do not fabricate any of the missing items):
+---
+{gap_analysis_json}
+---

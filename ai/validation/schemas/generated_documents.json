@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GeneratedDocuments",
+  "type": "object",
+  "properties": {
+    "resume_markdown": {"type": ["string", "null"]},
+    "cover_letter": {"type": ["string", "null"]},
+    "application_email": {
+      "type": ["object", "null"],
+      "properties": {
+        "subject": {"type": "string"},
+        "body": {"type": "string"}
+      }
+    },
+    "changes_made": {"type": "array", "items": {"type": "string"}},
+    "truthfulness_check_passed": {"type": "boolean"}
+  }
+}

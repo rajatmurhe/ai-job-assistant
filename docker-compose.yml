@@ -1,0 +1,105 @@
+# AI Job Assistant — Docker Compose
+# Stack B: FastAPI + Next.js + Gemini(primary)/Ollama(fallback) + Postgres/pgvector + n8n
+#
+# Core (always on): postgres, backend
+# Full dev stack:   docker compose --profile dev up -d
+#   adds: ollama, n8n, frontend, mailhog
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: aija_postgres
+    restart: unless-stopped
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-ai_job_assistant}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    container_name: aija_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    volumes:
+      - ./backend:/app
+      - ./ai:/app/ai
+      - ./storage:/app/storage
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: aija_ollama
+    restart: unless-stopped
+    profiles: ["dev"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    # After first startup, pull models:
+    #   docker exec aija_ollama ollama pull qwen2.5:7b
+    #   docker exec aija_ollama ollama pull nomic-embed-text
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: aija_n8n
+    restart: unless-stopped
+    profiles: ["dev"]
+    ports:
+      - "5678:5678"
+    environment:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: ${POSTGRES_DB:-ai_job_assistant}
+      DB_POSTGRESDB_USER: ${POSTGRES_USER:-postgres}
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      N8N_SECURE_COOKIE: "false"
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./automation/n8n/workflows:/workflows
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: aija_frontend
+    restart: unless-stopped
+    profiles: ["dev"]
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    depends_on:
+      - backend
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: aija_mailhog
+    restart: unless-stopped
+    profiles: ["dev"]
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  postgres_data:
+  ollama_data:
+  n8n_data:

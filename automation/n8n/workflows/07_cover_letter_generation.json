@@ -1,0 +1,59 @@
+{
+  "name": "Cover Letter Generation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cover-letter-generation",
+        "responseMode": "lastNode"
+      },
+      "id": "0",
+      "name": "Cover Letter Requested",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "webhookId": "cover-letter-generation"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.BACKEND_URL}}/api/v1/generate",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\"resume_id\": $json.body.resume_id, \"job_id\": $json.body.job_id} }}"
+      },
+      "id": "1",
+      "name": "Call Generate API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Cover Letter Requested": {
+      "main": [
+        [
+          {
+            "node": "Call Generate API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}

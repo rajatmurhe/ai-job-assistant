@@ -1,0 +1,13 @@
+{
+  "name": "ai-job-assistant-e2e",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.46.0",
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0"
+  }
+}

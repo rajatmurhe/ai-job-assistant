@@ -1,0 +1,59 @@
+{
+  "name": "Application Tracking",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "application-tracking",
+        "responseMode": "lastNode"
+      },
+      "id": "0",
+      "name": "Application Status Changed",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        200,
+        300
+      ],
+      "webhookId": "application-tracking"
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.BACKEND_URL}}/api/v1/applications/{{$json.body.application_id}}/status",
+        "options": {},
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\"status\": $json.body.status, \"note\": $json.body.note} }}"
+      },
+      "id": "1",
+      "name": "Update Application Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        450,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Application Status Changed": {
+      "main": [
+        [
+          {
+            "node": "Update Application Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  }
+}
