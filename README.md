@@ -1,6 +1,4 @@
-Yes — use this as the **full `README.md`**. It follows the exact style you showed: **feature heading → screenshot → explanation → next feature**.
 
-````markdown
 # AI Job Assistant: AI-Powered Job Search & Application Intelligence Platform
 
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
